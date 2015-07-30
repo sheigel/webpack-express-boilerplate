@@ -18,7 +18,7 @@ var config = {
       test: /\.js$/,
       loader: 'babel',
       exclude: [nodeModulesPath]
-    },{
+    }, {
       test: /\.css$/,
       loader: 'style!css'
     }]
