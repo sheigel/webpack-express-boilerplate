@@ -7,8 +7,9 @@ var proxy = httpProxy.createProxyServer({
 });
 var app = express();
 
+app.set('port', (process.env.PORT || 3001));
+
 var isProduction = process.env.NODE_ENV === 'production';
-var port = isProduction ? 8080 : 3001;
 var publicPath = path.resolve(__dirname, 'public');
 
 app.use(express.static(publicPath));
@@ -39,6 +40,6 @@ proxy.on('error', function(e){
   console.log('Could not connect to proxy, please try again...');
 });
 
-app.listen(port, function() {
-    console.log(port);
+app.listen(app.get('port'), function() {
+    console.log(app.get('port'));
 });
