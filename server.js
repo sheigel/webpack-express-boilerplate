@@ -13,11 +13,11 @@ var publicPath = path.resolve(__dirname, 'public');
 
 app.use(express.static(publicPath));
 
-// app.all('/db/*', function (req, res) {
-//   proxy.web(req, res, {
-//     target: 'https://webpack-express.firebaseio.com'
-//   });
-// });
+app.all('/db/*', function (req, res) {
+  proxy.web(req, res, {
+    target: 'https://webpack-express.firebaseio.com'
+  });
+});
 
 if (!isProduction) {
     var bundle = require('./server/bundle.js');
@@ -28,7 +28,7 @@ if (!isProduction) {
             target: 'http://localhost:8080'
         });
     });
-app.all('/socket.io/*', function(req, res) {
+    app.all('/socket.io/*', function(req, res) {
         proxy.web(req, res, {
             target: 'http://localhost:8080'
         });
